@@ -1,4 +1,4 @@
-var gifArr = ["the Office", "Friends", "House of Cards", "How I Met Your Mother", "Parks and Rec", "Black Mirror", "Breaking Bad"];
+var gifArr = ["the Office", "Friends", "House of Cards", "How I Met Your Mother", "Parks and Rec", "Black Mirror", "Breaking Bad", "Family Guy", "The Simpsons"];
 
 function renderButtons() {
     $(".buttonsdiv").empty();
@@ -21,14 +21,19 @@ function displayGifs() {
         $(".responses").empty();
         console.log(response);
         for (var i = 0; i < 10; i++) {
-            var gifUrl = response.data[i].images.fixed_height_small.url
+            var gifUrlAnimate = response.data[i].images.fixed_height_small.url;
+            var gifUrlStill = response.data[i].images.fixed_width_still.url;
+            var rating = $("<p>");
             var newGif = $("<img>");
-            newGif.attr("src", gifUrl);
-            newGif.attr("data-still", response.data[i].images.fixed_width_still.url);
-            newGif.attr("data-animate", response.data[i].images.fixed_height_small.url);
-            newGif.attr("data-state", "animate");
-            newGif.attr("class", "gifStatus")
+            newGif.attr("src", gifUrlStill);
+            newGif.attr("data-still", gifUrlStill);
+            newGif.attr("data-animate", gifUrlAnimate);
+            newGif.attr("data-state", "still");
+            newGif.attr("class", "gifStatus");
+            rating.text(response.data[i].rating);
+            $(".responses").append(rating);
             $(".responses").append(newGif);
+            $(".responses").append("<hr>");
             console.log(newGif);
         }
 
@@ -47,12 +52,13 @@ renderButtons();
 
 $(document).on("click", ".buttonClass", displayGifs);
 
-$(".gifStatus").on("click", function () {
+$(".responses").on("click", ".gifStatus", function () {
     var state = $(this).attr("data-state");
 
     if (state === "still") {
         $(this).attr("src", $(this).attr("data-animate"));
         $(this).attr("data-state", "animate");
+        console.log("in if statement");
     }
     else {
         $(this).attr("src", $(this).attr("data-still"));
