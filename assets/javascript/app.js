@@ -13,7 +13,7 @@ function renderButtons() {
 
 function displayGifs() {
     var gifInput = $(this).attr("data-type");
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifInput + "&api_key=pXOW1ZRRl2bjuJKvsBPJu76gitfdt9Dg&limit=10";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + gifInput + "&api_key=pXOW1ZRRl2bjuJKvsBPJu76gitfdt9Dg&limit=10";
     $.ajax({
         url: queryURL,
         method: "GET"
