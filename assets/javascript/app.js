@@ -1,33 +1,44 @@
-var gifArr = ["the Office", "Friends", "House of Cards", "White Collar", "Parks and Rec"];
-// var limit = userLimit;
-
-function displayGifs() {
-    var gifInput = $(this).attr("data-name");
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifInput + "&api_key=pXOW1ZRRl2bjuJKvsBPJu76gitfdt9Dg&limit=10";
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function (response) {
-        // $(".add-movie").text(JSON.stringify(response));
-        console.log(gifInput)
-    });
-}
+var gifArr = ["the Office", "Friends", "House of Cards", "How I Met Your Mother", "Parks and Rec", "Black Mirror", "Breaking Bad"];
 
 function renderButtons() {
     $(".buttonsdiv").empty();
     for (var i = 0; i < gifArr.length; i++) {
         var newButton = $("<button>");
         newButton.addClass("buttonClass btn-primary");
-        newButton.attr("data-name", gifArr[i]);
+        newButton.attr("data-type", gifArr[i]);
         newButton.text(gifArr[i]);
         $(".buttonsdiv").append(newButton);
     }
 }
 
+function displayGifs() {
+    var gifInput = $(this).attr("data-type");
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifInput + "&api_key=pXOW1ZRRl2bjuJKvsBPJu76gitfdt9Dg&limit=10";
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+        $(".responses").empty();
+        console.log(response);
+        for (var i = 0; i < 10; i++) {
+            var gifUrl = response.data[i].images.fixed_height_small.url
+            var newGif = $("<img>");
+            newGif.attr("src", gifUrl);
+            newGif.attr("data-still", response.data[i].images.fixed_width_still.url);
+            newGif.attr("data-animate", response.data[i].images.fixed_height_small.url);
+            newGif.attr("data-state", "animate");
+            newGif.attr("class", "gifStatus")
+            $(".responses").append(newGif);
+            console.log(newGif);
+        }
+
+    });
+}
+
 $("#add-gif").on("click", function (event) {
     event.preventDefault();
-    var gif = $(".buttonsdiv").val().trim();
-    gifArr.push(gifArr);
+    var typeBtn = $("#gif-input").val().trim();
+    gifArr.push(typeBtn);
     console.log(gifArr);
     renderButtons();
 })
@@ -36,3 +47,16 @@ renderButtons();
 
 $(document).on("click", ".buttonClass", displayGifs);
 
+$(".gifStatus").on("click", function () {
+    var state = $(this).attr("data-state");
+
+    if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+    }
+    else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+        console.log("in else statement");
+    }
+});

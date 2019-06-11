@@ -1,9 +1,6 @@
-.buttonsdiv {
-
+.buttonClass:hover {
+    color: blue;
 }
-.searchbar {
-
-}
-.responses {
-    
+.buttonClass {
+    color: lightblue;
 }
