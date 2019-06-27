@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Giftastic</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -13,14 +13,41 @@
 </head>
 
 <body>
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="tabs">
+            </div>
+        </div>
+        <div class="menu">
+            <h3 class="title"><a href="index.html">Giftastic</a></h3>
+            <i class="fas fa-bars toggle"></i>
+        </div>
+        <div class="gif-content">
+            <form class="search-bar">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="input-bar" placeholder="Search...">
+                    <input type="submit" class="submit">
+                </div>
+            </form>
+            <div class="gif-area">
+                <div class="error-message"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
     <div class="buttonsdiv"></div>
     <div class="searchbar">
         <input type="text" id="gif-input"><br>
         <input id="add-gif" type="submit" value="Get gifs!">
-        <!-- <input id="movies-number" type="submit" value="How many gifs?"> -->
-    <div class="gifs">
-        
-    </div>
+        <div class="gifs">
+
+        </div>
     </div>
     <div class="responses"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -35,11 +62,3 @@
 </body>
 
 </html>
-
-<!--
-giphyAPIsearcher
-
-data-state=still 
-data-state=animate
-
--->
